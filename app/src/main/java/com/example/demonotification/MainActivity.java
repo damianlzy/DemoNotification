@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnNotify1 = (Button) findViewById(R.id.btnNotify1);
+        btnNotify2 = (Button) findViewById(R.id.btnNotify2);
 
         btnNotify1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +61,50 @@ public class MainActivity extends AppCompatActivity {
                 // programmatically later on
                 notificationManager.notify(notificationID, n);
                 finish();
+            }
+        });
+
+
+        btnNotify2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,MainActivity.class);
+
+                PendingIntent pIntent = PendingIntent.getActivity
+                        (MainActivity.this, requestCode,
+                                intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                Notification.BigTextStyle bigText = new Notification.BigTextStyle();
+                bigText.bigText("This is one big texthjkhjkhgfhjjjjjjjjs is one big text" +
+                        "This is one big texthjkhjkhgfhjjjjjjjjs is one big text" +
+                        "This is one big texthjkhjkhgfhjjjjjjjjs is one big text" +
+                        "This is one big texthjkhjkhgfhjjjjjjjjs is one big text" +
+                        "This is one big texthjkhjkhgfhjjjjjjjjs is one big text" +
+                        "This is one big texthjkhjkhgfhjjjjjjjjs is one big text" +
+                        "vThis is one big texthjkhjkhgfhjjjjjjjjs is one big text");
+                bigText.setBigContentTitle("Big Text – Long Content");
+                bigText.setSummaryText("Reflection Journal?");
+
+                // Build notification
+                Notification.Builder builder = new
+                        Notification.Builder(MainActivity.this);
+                builder.setContentTitle("Amazing Offer!");
+                builder.setContentText("Subject");
+                builder.setSmallIcon(R.mipmap.ic_launcher);
+                builder.setContentIntent(pIntent);
+                builder.setStyle(bigText);
+                builder.setAutoCancel(true);
+
+                Notification n = builder.build();
+
+                NotificationManager notificationManager = (NotificationManager)
+                        getSystemService(NOTIFICATION_SERVICE);
+
+                // This replaces the existing notification with the same ID
+                notificationManager.notify(notificationID, n);
+                finish();
+
+
             }
         });
     }
